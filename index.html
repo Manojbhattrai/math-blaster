@@ -235,54 +235,57 @@ min-height:90px;
 
 @media(max-width:768px){
 
+body{
+overflow-x:hidden;
+}
+
 .game-container{
 display:flex;
 flex-direction:row;
 justify-content:space-between;
 align-items:flex-start;
-padding:10px;
-gap:10px;
+padding:8px;
+gap:8px;
 }
 
 .questions{
-width:72%;
+width:68%;
 }
 
 .options{
-width:25%;
+width:28%;
 display:flex;
 flex-direction:column;
-gap:12px;
+gap:10px;
 align-items:center;
-margin-top:0;
-}
-
-.option{
-width:90px;
-font-size:18px;
-padding:12px;
 }
 
 .question-row{
-gap:8px;
+display:flex;
+flex-wrap:nowrap;
+align-items:center;
+gap:6px;
 padding:10px;
 margin-bottom:15px;
+overflow:hidden;
 }
 
 .question-text{
-font-size:16px;
+font-size:14px;
 min-width:90px;
-padding:6px 10px;
+padding:6px 8px;
 }
 
 .star-box{
 width:50px;
 height:50px;
-font-size:22px;
+font-size:20px;
 }
 
 .star-number{
 font-size:14px;
+left:5px;
+bottom:4px;
 }
 
 .equal-box{
@@ -292,29 +295,37 @@ font-size:28px;
 }
 
 .drop-box{
-width:95px;
+width:85px;
 height:50px;
-font-size:18px;
+font-size:16px;
+border-width:3px;
+}
+
+.option{
+width:85px;
+font-size:16px;
+padding:14px 8px;
 }
 
 .submit-btn{
-font-size:18px;
-padding:12px 25px;
-margin-top:20px;
+font-size:16px;
+padding:12px 20px;
+margin-top:15px;
+width:90%;
 }
 
 h1{
 font-size:24px;
+margin-top:15px;
+}
+
+.flip-btn{
+font-size:18px;
+padding:12px 20px;
+width:85%;
 }
 
 }
-
-.drop-box{
-width:140px;
-height:65px;
-font-size:20px;
-}
-
 
 
 </style>
