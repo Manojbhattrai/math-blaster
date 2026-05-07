@@ -1,503 +1,569 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>MATH BLASTERS</title>
-  <style>
-    body {
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
-      position: relative;
-      background: linear-gradient(to right, #020024, #090979, #000000);
-      font-family: Arial, sans-serif;
-      color: white;
-      touch-action: manipulation;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #020024, #090979, #000000);
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Blaster</title>
 
-    h1 {
-      margin-top: 20px;
-      font-size: 40px;
-    }
+<style>
 
-    p {
-      font-size: 18px;
-    }
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(to bottom,#020024,#090979,#000000);
+color:white;
+overflow:hidden;
+}
 
-    .space {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      width: 100%;
-      height: 55vh;
-      margin-top: 20px;
-      flex-direction: row;
-    }
+h1{
+text-align:center;
+margin-top:20px;
+font-size:45px;
+}
 
-    .planet {
-      position: relative;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      font-size: 22px;
-      font-weight: bold;
-      transition: transform 0.3s ease;
-      box-shadow: 0 0 20px rgba(255,255,255,0.5);
-    }
+p{
+text-align:center;
+font-size:20px;
+}
 
-    .planet:hover {
-      transform: scale(1.1);
-    }
+.space{
+display:flex;
+justify-content:space-evenly;
+align-items:center;
+height:60vh;
+}
 
-    .robot {
-      width: 80px;
-      position: absolute;
-      bottom: 30px;
-      left: 42%;
-      transition: all 2s ease-in-out;
-      font-size: 70px;
-      z-index: 1000;
-    }
+.planet{
+width:180px;
+height:180px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,255,255,0.5);
+transition:0.3s;
+}
 
-    .planet1 {
-      background: orange;
-    }
+.planet:hover{
+transform:scale(1.1);
+}
 
-    .planet2 {
-      background: deepskyblue;
-    }
+.planet1{
+background:orange;
+}
 
-    .quiz-box {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 45vh;
-      overflow-y: auto;
-      background: rgba(0,0,0,0.85);
-      border-top-left-radius: 25px;
-      border-top-right-radius: 25px;
-      padding: 20px;
-      margin-top: 40px;
-      display: none;
-      background: rgba(255,255,255,0.1);
-      width: 350px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 20px;
-      border-radius: 15px;
-    }
+.planet2{
+background:deepskyblue;
+}
 
-    input {
-      padding: 10px;
-      width: 80%;
-      margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-    }
+.rocket{
+position:absolute;
+bottom:30px;
+left:42%;
+font-size:80px;
+transition:all 2s ease-in-out;
+z-index:1000;
+}
 
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #00c3ff;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.quizPage{
+width:100vw;
+height:100vh;
+overflow-y:auto;
+background:linear-gradient(to bottom,#020024,#090979,#000000);
+}
 
-    button:hover {
-      background: #008cff;
-    }
+.game-container{
+display:flex;
+justify-content:space-between;
+padding:20px;
+}
 
-    #result {
-      margin-top: 15px;
-      font-size: 20px;
-      font-weight: bold;
-    }
+.questions{
+width:75%;
+}
 
-    .score {
-      margin-top: 20px;
-      font-size: 22px;
-    }
-  
+.question-row{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:25px;
+background:rgba(255,255,255,0.08);
+padding:15px;
+border-radius:20px;
+}
 
-    @media screen and (max-width: 768px) {
-      .space {
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-      }
+.question-text{
+background:white;
+color:black;
+padding:8px 18px;
+font-size:24px;
+font-weight:bold;
+border-radius:10px;
+min-width:150px;
+font-family:cursive;
+}
 
-      .planet {
-        width: 140px;
-        height: 140px;
-        font-size: 22px;
-      }
+.star-box{
+width:70px;
+height:65px;
+background:white;
+color:black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:30px;
+border-radius:10px;
+position:relative;
+}
 
-      .robot {
-        font-size: 70px;
-      }
+.star-number{
+position:absolute;
+left:8px;
+bottom:5px;
+font-size:18px;
+font-weight:bold;
+}
 
-      .quiz-box {
-        height: 48vh;
-        padding: 15px;
-      }
+.equal-box{
+width:65px;
+height:65px;
+background:white;
+color:black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:40px;
+border-radius:10px;
+}
 
-      button {
-        font-size: 20px;
-      }
-    }
-      body {
-        overflow-x: hidden;
-      }
+.drop-box{
+width:170px;
+height:70px;
+border:4px dashed #4d5fff;
+border-radius:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+color:white;
+background:rgba(255,255,255,0.05);
+}
 
-      h1 {
-        font-size: 24px;
-      }
+.options{
+width:20%;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
 
-      p {
-        font-size: 16px;
-      }
+.option{
+background:white;
+color:black;
+padding:20px;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+border:3px solid #35506b;
+cursor:grab;
+border-radius:10px;
+}
 
-      .space {
-        margin-top: 140px;
-        gap: 10px;
-      }
+.submit-btn{
+display:block;
+margin:30px auto;
+padding:18px 50px;
+font-size:28px;
+border:none;
+border-radius:25px;
+background:linear-gradient(to right,limegreen,#00cc66);
+color:white;
+cursor:pointer;
+font-weight:bold;
+box-shadow:0 0 20px lime;
+}
 
-      .planet {
-        width: 130px;
-        height: 130px;
-        font-size: 18px;
-      }
+.flip-btn{
+margin-top:20px;
+padding:18px 35px;
+font-size:28px;
+border:none;
+border-radius:20px;
+background:orange;
+color:white;
+cursor:pointer;
+font-weight:bold;
+box-shadow:0 0 20px orange;
+}
 
-      .robot {
-        font-size: 65px;
-        left: 40%;
-        bottom: 20px;
-      }
+.answerBox{
+display:none;
+margin-top:10px;
+padding:10px;
+font-size:24px;
+font-weight:bold;
+border-radius:15px;
+color:white;
+}
 
-      .quiz-box {
-        width: 92%;
-        margin-top: 30px;
-        padding: 15px;
-        border-radius: 20px;
-      }
+.correct{
+background:green;
+}
 
-      button {
-        font-size: 18px;
-        padding: 14px 20px;
-      }
+.wrong{
+background:red;
+}
 
-      #questionsContainer label {
-        font-size: 20px;
-      }
-    
+.result-card{
+margin:10px auto;
+padding:10px;
+border-radius:18px;
+width:92%;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+min-height:90px;
+}
 
-      h1 {
-        font-size: 28px;
-      }
-
-      .planet {
-        width: 120px;
-        height: 120px;
-        font-size: 18px;
-      }
-
-      .quiz-box {
-        width: 92%;
-        padding: 15px;
-      }
-
-      input {
-        font-size: 18px;
-      }
-    
-  </style>
+</style>
 </head>
+
 <body>
 
-  <h1>🚀 MATH BLASTERS</h1>
+<h1>🚀 Space Math Game</h1>
 
-  <div class="robot" id="robot">🚀</div>
+<div class="rocket" id="rocket">🚀</div>
 
-  <div class="space">
-    <div class="planet planet1" onclick="moveRobot('planet1')">Planet 1</div>
-    <div class="planet planet2" onclick="moveRobot('planet2')">Planet 2</div>
-  </div>
+<div class="space">
 
-  <div class="quiz-box" id="quizBox">
-    <h2>🌟 Solve All Questions</h2>
+<div class="planet planet1" onclick="moveRocket('planet1')">
+Planet 1
+</div>
 
-    <div id="questionsContainer"></div>
+<div class="planet planet2" onclick="moveRocket('planet2')">
+Planet 2
+</div>
 
-    <button onclick="checkAnswers()" style="width:100%; font-size:24px; padding:18px; margin-top:20px; border-radius:20px; background:limegreen;">
-      ✅ Submit All Answers
-    </button>
+</div>
 
-    <div id="result"></div>
+<script>
 
-    <div id="wrongAnswers"></div>
-  </div>
+function moveRocket(planet){
 
-  <div class="score">
-    Score: <span id="score">0</span>
-  </div>
+const rocket=document.getElementById("rocket");
 
-  <script>
-    let score = 0;
-    let selectedPlanet = '';
-    let currentQuestions = [];
+if(planet==="planet1"){
+rocket.style.left="18%";
+rocket.style.bottom="350px";
+}
 
-    function moveRobot(planet) {
-      document.querySelectorAll('.planet').forEach(p => {
-        p.style.boxShadow = '0 0 20px rgba(255,255,255,0.5)';
-      });
+if(planet==="planet2"){
+rocket.style.left="65%";
+rocket.style.bottom="350px";
+}
 
-      const selectedPlanetElement = document.querySelector(`.${planet}`);
-      selectedPlanetElement.style.boxShadow = '0 0 40px lime';
+setTimeout(()=>{
+startGame();
+},2000);
 
-      const rocket = document.getElementById('robot');
+}
 
-      if (planet === 'planet1') {
-        rocket.style.left = '18%';
-        rocket.style.bottom = '360px';
-      }
+function startGame(){
 
-      if (planet === 'planet2') {
-        rocket.style.left = '65%';
-        rocket.style.bottom = '360px';
-      }
+document.body.innerHTML=`
 
-      setTimeout(() => {
-        const explosion = document.createElement('div');
+<div class="quizPage">
 
-        explosion.innerHTML = '💥';
-        explosion.style.position = 'absolute';
-        explosion.style.left = rocket.style.left;
-        explosion.style.bottom = rocket.style.bottom;
-        explosion.style.fontSize = '100px';
-        explosion.style.zIndex = '2000';
+<h1>🚀 Space Math Game</h1>
 
-        document.body.appendChild(explosion);
+<div class="game-container">
 
-        setTimeout(() => {
-          explosion.remove();
-          startGame();
-        }, 800);
+<div class="questions">
 
-      }, 2000);
-    }
+${createQuestion("Half","35","17 1/2")}
+${createQuestion("One third","35","11 2/3")}
+${createQuestion("One ninth","36","4")}
+${createQuestion("One ninth","35","3 8/9")}
 
-    function startGame() {
-      document.body.innerHTML = `
-        <div style="width:100vw;height:100vh;background:linear-gradient(to right,#020024,#090979,#000000);color:white;font-family:Arial,sans-serif;overflow:hidden;">
-          <h1 style="text-align:center;">🚀 Space Math Game</h1>
-          <p style="text-align:center;">🌟 Solve all questions and submit!</p>
+<button class="submit-btn" onclick="checkAnswers()">
+🚀 SUBMIT ANSWERS
+</button>
 
-          <div class="quiz-box" id="quizBox" style="display:block;width:100%;height:85vh;position:relative;background:rgba(0,0,0,0.9);overflow-y:auto;">
-            <h2>🌟 Solve All Questions</h2>
-            <div id="questionsContainer"></div>
+</div>
 
-            <button onclick="checkAnswers()" style="width:100%; font-size:24px; padding:18px; margin-top:20px; border-radius:20px; background:limegreen;">
-              ✅ Submit All Answers
-            </button>
+<div class="options">
 
-            <div id="result"></div>
-            <div id="wrongAnswers"></div>
-          </div>
-        </div>
-      `;
-      
+<div class="option" draggable="true" ondragstart="drag(event)" id="a1">
+4
+</div>
 
-      const questionsContainer = document.getElementById('questionsContainer');
-      questionsContainer.innerHTML = '';
+<div class="option" draggable="true" ondragstart="drag(event)" id="a2">
+17 1/2
+</div>
 
-      currentQuestions = [];
+<div class="option" draggable="true" ondragstart="drag(event)" id="a3">
+3 8/9
+</div>
 
-      const questionPool = [
-        { q: '1/2 + 1/2', a: '1' },
-        { q: '3/4 + 1/4', a: '1' },
-        { q: '1/3 + 1/3', a: '2/3' },
-        { q: '2/5 + 1/5', a: '3/5' },
-        { q: '5 + 7', a: '12' },
-        { q: '9 - 4', a: '5' },
-        { q: '6 × 3', a: '18' },
-        { q: '20 ÷ 5', a: '4' }
-      ];
+<div class="option" draggable="true" ondragstart="drag(event)" id="a4">
+11 2/3
+</div>
 
-      for (let i = 0; i < 5; i++) {
-        const randomQuestion = questionPool[Math.floor(Math.random() * questionPool.length)];
-        currentQuestions.push(randomQuestion);
+</div>
 
-        const wrongOptions = questionPool
-          .map(q => q.a)
-          .filter(ans => ans !== randomQuestion.a)
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 3);
+</div>
 
-        const options = [randomQuestion.a, ...wrongOptions].sort(() => Math.random() - 0.5);
+</div>
 
-        options.sort(() => Math.random() - 0.5);
+`;
 
-        questionsContainer.innerHTML += `
-          <div style="margin-bottom:25px; background:rgba(255,255,255,0.1); padding:15px; border-radius:15px;">
-            <label style="font-size:20px;">🪐 ${randomQuestion.q} = </label>
+}
 
-            <div ondrop="drop(event)" ondragover="allowDrop(event)"
-              id="drop${i}"
-              data-answer="${randomQuestion.a}"
-              style="margin:15px auto; width:120px; height:50px; border:2px dashed white; border-radius:10px; line-height:50px;">
-              Drop Answer Here
-            </div>
+function createQuestion(name,num,answer){
 
-            <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:15px;">
-              ${options.map(option => `
-                <div draggable="true"
-                  ondragstart="drag(event)"
-                  id="drag${i}${option}"
-                  data-value="${option}"
-                  style="background:#00c3ff; padding:12px 18px; border-radius:14px; cursor:pointer; color:white; font-weight:bold; font-size:20px; min-width:60px; text-align:center;">
-                  ${option}
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;
-      }
+return `
+<div class="question-row">
 
-      document.getElementById('result').innerText = '';
-      document.getElementById('wrongAnswers').innerHTML = '';
-    }
+<div class="question-text">${name}</div>
 
-    function checkAnswers() {
-      let correctCount = 0;
-      let wrongList = '';
+<div class="star-box">
+⭐
+<div class="star-number">${num}</div>
+</div>
 
-      currentQuestions.forEach((question, index) => {
-        const userAnswer = document.getElementById(`drop${index}`).innerText.trim();
+<div class="equal-box">=</div>
 
-        if (userAnswer == question.a) {
-          correctCount++;
-        } else {
-          wrongList += `
-            <div style="margin-top:10px; background:#222; padding:10px; border-radius:10px;">
-              ❌ Question: ${question.q}<br>
-              
-              <div style="display:none; margin-top:8px; color:yellow;">
-                Correct Answer: ${question.a}
-              </div>
-            </div>
-          `;
-        }
-      });
+<div class="drop-box"
+ondrop="drop(event)"
+ondragover="allowDrop(event)"
+data-answer="${answer}"
+data-question="${name}"
+data-number="${num}">
+?
+</div>
 
-      if (correctCount === currentQuestions.length) {
-        document.getElementById('quizBox').innerHTML = `
-          <div style="padding:40px;">
-            <div style="padding:40px; text-align:center;">
-            <div style="font-size:80px;">🎉🥳🚀</div>
-            <h1 style="color:lime; font-size:50px;">HURRAH! 🏆 YOU WON!</h1>
-            <p style="font-size:24px;">All answers are correct! Great job space explorer 🌟</p>
-            <button onclick="location.reload()">Play Again</button>
-          </div>
-        `;
+</div>
+`;
 
-        score++;
-      } else {
-        let resultPage = `
-          <div style="padding:20px;">
-            <h1 style="color:red;">🚨 Oh No!</h1>
-            <h2>You made ${currentQuestions.length - correctCount} wrong questions.</h2>
-        `;
+}
 
-        currentQuestions.forEach((question, index) => {
-          const userAnswer = document.getElementById(`drop${index}`).innerText.trim();
-          const isCorrect = userAnswer == question.a;
+function allowDrop(ev){
+ev.preventDefault();
+}
 
-          resultPage += `
-            <div style="margin-top:20px; background:rgba(255,255,255,0.1); padding:15px; border-radius:15px; border:2px solid ${isCorrect ? 'lime' : 'red'};">
-              <h3 style="color:${isCorrect ? 'lime' : 'red'};">
-                ${isCorrect ? '✅ Correct' : '❌ Wrong'}
-              </h3>
+function drag(ev){
+ev.dataTransfer.setData("text",ev.target.id);
+}
 
-              <p>${question.q}</p>
+function drop(ev){
 
-              
+ev.preventDefault();
 
-              <div data-hidden-answer="true" style="display:none; margin-top:10px; font-size:26px; font-weight:bold; color:${isCorrect ? 'lime' : 'red'};">
-                ${question.a}
-              </div>
-            </div>
-          `;
-        });
+const data=ev.dataTransfer.getData("text");
 
-        resultPage += `
-            <br>
-            <button id="flipAllBtn" onclick="flipAllAnswers()" style="margin-top:20px; font-size:22px; padding:15px 25px; border-radius:15px;">
-              🔄 Flip All Answers
-            </button>
+const dragged=document.getElementById(data);
 
-            <p id="homeMessage" style="display:none; margin-top:20px; font-size:24px; color:yellow; font-weight:bold;">
-              ✅ Tap anywhere on the screen to go back to the home page.
-            </p>
-          </div>
-        `;
+ev.target.innerHTML="";
+ev.target.appendChild(dragged);
 
-        document.getElementById('quizBox').innerHTML = resultPage;
-      }
+}
 
-      document.getElementById('score').innerText = score;
-    }
+function checkAnswers(){
 
-    function allowDrop(ev) {
-      ev.preventDefault();
-    }
+const boxes=document.querySelectorAll(".drop-box");
 
-    function drag(ev) {
-      ev.dataTransfer.setData('text', ev.target.getAttribute('data-value'));
-    }
+let correct=0;
+let wrong=0;
 
-    function drop(ev) {
-      ev.preventDefault();
-      const data = ev.dataTransfer.getData('text');
-      ev.target.innerText = data;
-    }
+let resultHTML="";
 
-    function flipAllAnswers() {
-      const answers = document.querySelectorAll('[data-hidden-answer]');
+boxes.forEach((box)=>{
 
-      answers.forEach(answer => {
-        answer.style.display = 'block';
-      });
+const correctAnswer=box.dataset.answer;
+const question=box.dataset.question;
+const number=box.dataset.number;
 
-      const flipButton = document.getElementById('flipAllBtn');
-      flipButton.style.display = 'none';
+let userAnswer="";
 
-      document.getElementById('homeMessage').style.display = 'block';
+if(box.querySelector(".option")){
+userAnswer=box.querySelector(".option").innerText.trim();
+}
 
-      setTimeout(() => {
-        document.body.onclick = function() {
-          location.reload();
-        }
-      }, 500);
-    }
-  
-  
-  </script>
+const isCorrect=userAnswer===correctAnswer;
+
+if(isCorrect){
+correct++;
+}else{
+wrong++;
+}
+
+resultHTML+=`
+
+<div class="result-card"
+style="
+border:3px solid ${isCorrect ? 'lime' : 'red'};
+background:rgba(255,255,255,0.08);
+">
+
+<h2 style="color:${isCorrect ? 'lime' : 'red'};width:100%;">
+${isCorrect ? '✅ Correct' : '❌ Wrong'}
+</h2>
+
+<div class="question-text">${question}</div>
+
+<div class="star-box">
+⭐
+<div class="star-number">${number}</div>
+</div>
+
+<div class="equal-box">=</div>
+
+<div class="answerBox ${isCorrect ? 'correct' : 'wrong'}">
+✅ Correct Answer: ${correctAnswer}
+</div>
+
+</div>
+
+`;
+
+});
+
+if(correct===4){
+
+document.body.innerHTML=`
+
+<div id="winScreen" style="
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:black;
+text-align:center;
+cursor:pointer;
+">
+
+<div style="font-size:120px;">🎉🚀🥳</div>
+
+<h1 style="font-size:70px;color:lime;">
+HURRAY! YOU WON!
+</h1>
+
+<p style="font-size:30px;">
+All answers are correct 🌟
+</p>
+
+<p style="
+font-size:24px;
+color:yellow;
+margin-top:20px;
+">
+✅ Tap anywhere to play again
+</p>
+
+</div>
+
+`;
+
+setTimeout(()=>{
+
+document.getElementById("winScreen").onclick=function(){
+
+location.reload();
+
+}
+
+},500);
+
+}else{
+
+document.body.innerHTML=`
+
+<div style="
+height:100vh;
+padding:15px;
+background:linear-gradient(to bottom,#020024,#090979,#000000);
+text-align:center;
+overflow-y:auto;
+box-sizing:border-box;
+">
+
+<h1 style="
+font-size:45px;
+color:red;
+margin:10px 0;
+">
+🚨 OH NO!
+</h1>
+
+<h2 style="
+font-size:28px;
+margin-bottom:15px;
+">
+You made ${wrong} questions wrong.
+</h2>
+
+${resultHTML}
+
+<button
+class="flip-btn"
+onclick="flipAnswers(event)"
+id="flipBtn">
+🔄 Flip All Answers
+</button>
+
+<p id="homeText"
+style="
+display:none;
+font-size:25px;
+margin-top:20px;
+color:yellow;
+font-weight:bold;
+">
+✅ Tap anywhere to go home
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+
+function flipAnswers(event){
+
+event.stopPropagation();
+
+const answers=document.querySelectorAll(".answerBox");
+
+answers.forEach(answer=>{
+
+answer.style.display="block";
+
+});
+
+document.getElementById("flipBtn").style.display="none";
+
+document.getElementById("homeText").style.display="block";
+
+setTimeout(()=>{
+
+document.body.onclick=function(){
+
+location.reload();
+
+}
+
+},500);
+
+}
+
+</script>
 
 </body>
 </html>
